@@ -59,8 +59,6 @@ Property level encryption so databases remain human readable whilst securing ind
   s.preserve_paths = 'DBAccess.framework'
   s.public_header_files = 'DBAccess.framework/**/*.h'
   s.vendored_frameworks = 'DBAccess.framework'
-
   s.frameworks = 'DBAccess'
-  s.use_frameworks!
 
 end
