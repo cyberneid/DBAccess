@@ -1,11 +1,3 @@
-#
-# Be sure to run `pod lib lint ${POD_NAME}.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
 
 Pod::Spec.new do |s|
   s.name             = "[DBAccess]"
@@ -29,7 +21,6 @@ FEATURES
 Tables are automatically modelled from your classes for the simplest of upgrade paths, you add a property, it adds the column.  Completely thread-safe in every scenario. Simple, powerful and flexible event model allows you to bind UI updates with anything that is happening to the database and best of all, is the use of standard SQLite syntax for the query conditions. Plus far too much to fit on this page.
 
 WHY SHOULD I USE [DBAccess] ?
-
 
 An ORM should not be a chore to work with, or require you to change your way of working to compensate for its shortcomings.   With [DBAccess] you simply add it to your project and start using it straight away.
 
@@ -60,5 +51,8 @@ Property level encryption so databases remain human readable whilst securing ind
   s.public_header_files = 'DBAccess.framework/**/*.h'
   s.vendored_frameworks = 'DBAccess.framework'
   s.frameworks = 'DBAccess'
+  s.library = 'DBAccess'
+  s.xcconfig = { 'LIBRARY_SEARCH_PATHS' => '$(PODS_ROOT)/[DBAccess]' }
+  
 
 end
