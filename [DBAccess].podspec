@@ -47,7 +47,7 @@ Property level encryption so databases remain human readable whilst securing ind
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
-  s.preserve_paths = '[DBAccess]/DBAccess.framework'
+  s.preserve_paths = 'DBAccess.framework'
   s.public_header_files = 'DBAccess.framework/Headers/*.h'
   s.vendored_frameworks = 'DBAccess.framework'
   s.frameworks = 'Foundation','DBAccess'
