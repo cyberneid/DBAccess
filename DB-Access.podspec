@@ -1,6 +1,6 @@
 
 Pod::Spec.new do |s|
-  s.name             = "[DBAccess]"
+  s.name             = "DB-Access"
   s.version          = "1.6.1"
   s.summary          = "[DBAccess] is a fully featured and FREE to use ORM for iOS."
   s.description      = <<-DESC
