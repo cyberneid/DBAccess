@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DBAccess"
-  s.version          = "1.6.4"
+  s.version          = "1.6.5"
   s.summary          = "[DBAccess] is a fully featured and FREE to use ORM for iOS."
   s.description      = <<-DESC
                        [DBAccess] is a fully featured and FREE to use ORM for iOS.
@@ -51,7 +51,7 @@ Property level encryption so databases remain human readable whilst securing ind
   s.public_header_files = 'DBAccess.framework/**/*.h'
   s.vendored_frameworks = 'DBAccess.framework'
   s.frameworks = 'Foundation','DBAccess'
-  s.xcconfig   = { 'FRAMEWORK_SEARCH_PATHS' => '$(SRCROOT)/DB-Access/' }
+  s.xcconfig   = { 'FRAMEWORK_SEARCH_PATHS' => '$(SRCROOT)/DBAccess/' }
   
 
 end
