@@ -14,8 +14,8 @@ Copyright (C) 2010 iPresent inc. All rights reserved.
 
  */
 
-#define DB_ACCESS_DATE              20150422
-#define DB_ACCESS_VER               1.06.2
+#define DB_ACCESS_DATE              20150529
+#define DB_ACCESS_VER               1.06.4
 
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
@@ -376,7 +376,7 @@ typedef     void(^contextExecutionBlock)();
 @property (nonatomic, strong)   NSNumber* Id;
 
 /// Joined data, if set this contains the results of the query from adjoining tables
-@property (nonatomic, strong)   NSDictionary* joinedResults;
+@property (nonatomic, strong, readonly)   NSDictionary* joinedResults;
 
 /**
  * Initialises a new instance of the object, if an object already exists with the specified primary key then you will get that object back, if not you will net a new object with the primary key specified already.
@@ -386,6 +386,14 @@ typedef     void(^contextExecutionBlock)();
  * @return DBObject* Either an existing or new class.
  */
 - (id)initWithPrimaryKeyValue:(NSObject*)priKeyValue;
+/**
+ * Returns an object that matches the primary key value specified, if there is no match, nil is returned.
+ 
+ *
+ * @param (NSObject*)priKeyValue The primary key value to look up an existing object
+ * @return DBObject* Either an existing object or nil.
+ */
++ (id)objectWithPrimaryKeyValue:(NSObject*)priKeyValue;
 /**
  * Removes the object form the database
 
