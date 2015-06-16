@@ -14,8 +14,8 @@ Copyright (C) 2010 iPresent inc. All rights reserved.
 
  */
 
-#define DB_ACCESS_DATE              20150529
-#define DB_ACCESS_VER               1.06.5
+#define DB_ACCESS_DATE              20150616
+#define DB_ACCESS_VER               1.06.7
 
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
@@ -25,6 +25,7 @@ Copyright (C) 2010 iPresent inc. All rights reserved.
 @class DBEvent;
 @class DBEventHandler;
 @class DBQuery;
+@class DBFTSQuery;
 @class DBTransaction;
 
 typedef void(^DBTransactionBlockBlock)();
@@ -195,6 +196,12 @@ typedef enum {
  * @return void;
  */
 +(void)openDatabaseNamed:(NSString*)dbName;
+/**
+ * Closes a database file of the given name, flushing all caches, and invalidating any objects that are still in use within the system.
+ *
+ * @return void;
+ */
++(void)closeDatabaseNamed:(NSString*)dbName;
 
 @end
 
@@ -366,6 +373,8 @@ typedef     void(^contextExecutionBlock)();
 
 /// Creates a DBQuery object for this class
 + (DBQuery*)query;
+/// Create a Full Text Search query object for this class
++(DBQuery*)fts;
 /// Returns the first object where th eproperty is matched with value
 + (id)firstMatchOf:(NSString*)property withValue:(id)value;
 
@@ -453,6 +462,18 @@ typedef     void(^contextExecutionBlock)();
  */
 - (void)entityDidDelete;
 /**
+ * Used to indicate to DBAccess that you wish to create a FTS virtual table using the return values.
+ *
+ * @return (NSArray*) Return an array of property names, these will be used to create the virtual table, any inserts into the fts table will also automatically contain these values.
+ */
++ (NSArray*)FTSParametersForEntity;
+/**
+ * Used to indicate to DBAccess that this class does not raise Insert, Update & Delete event notifications.
+ *
+ * @return (BOOL) If true is returned, event notifications will not be raised.  This will significantly improve the speed of I,U & D operations.
+ */
++ (BOOL)entityDoesNotRaiseEvents;
+/**
  * Used to specify the relationships between objects.  The class will be asked to return the relationship object for a certain property.
 ∫
  *
@@ -480,6 +501,12 @@ typedef     void(^contextExecutionBlock)();
  * @return and (NSArray*) of property names that DBAccess should keep encrypted in the database.
  */
 + (NSArray*)encryptedPropertiesForClass;
+/**
+ * Specifies the properties on the class that should be unique within the datastore, before a commit operation is performed a test is made to ensure another record with those exact properties does not already exist.  Commit will return NO/FALSE if there is an existant match.
+ *
+ * @return and (NSArray*) of property names that DBAccess should test for uniqueness.
+ */
++ (NSArray*)uniquePropertiesForClass;
 /**
  * Specifies the database file that this particular class will be persisted in.  This enables you to have your persistable classes spanning many different files.
 
@@ -672,6 +699,13 @@ typedef void(^DBQueryAsyncResponse)(DBResultSet* results);
  */
 - (DBQuery*)offset:(int)offset;
 /**
+ * Specifies the number of results to retrieve in a batch, the DBResultset is then created using a batch store co-ordinator.
+ *
+ * @param (int)batchSize the batch size of the query.
+ * @return (DBQuery*) this value can be discarded or used to nest queries together to form clear and concise statements.
+ */
+- (DBQuery*)batchSize:(int)batchSize;
+/**
  * Specifies the managed object domain that the query results will be added to.
 
  *
@@ -785,12 +819,56 @@ typedef void(^DBQueryAsyncResponse)(DBResultSet* results);
  */
 - (int)count;
 /**
+ * Performs the query and returns an array of distinct values of the specified property name.
+ *
+ * @param (NSString*)propertyName the property name to select the distict values of
+ * @return (NSArray*) results of the query, the key values are the distinct values of the paramater that was specified.
+ */
+- (NSArray*)distinct:(NSString*)propertyName;
+
+/**
  * Performs the query and returns the sum of the numeric property that is specified in the parameter.
 
  * @param (NSString*)propertyName the property name to perform the SUM aggregation function on.
  * @return (double)  sum of the specified parameter across all results.
  */
 - (double)sumOf:(NSString*)propertyName;
+
+@end
+
+/**
+ * A DBFTS class is used to construct a Full Text Search object and return results from the virtual table.
+ *
+ *
+ */
+@interface DBFTSQuery : DBQuery
+
+/* parameter methods */
+/**
+ * Specifies the WHERE clause of the full text search query statement
+ 
+ *
+ * @param (NSString*)where contains the parameters for the query, e.g. " forename MATCH 'Adrian' "
+ * @return (DBQuery*) this value can be discarded or used to nest queries together to form clear and concise statements.
+ */
+- (DBQuery*)where:(NSString*)where;
+/**
+ * Specifies the WHERE clause of the query statement, using a standard format string.
+ 
+ *
+ * @param (NSString*)where contains the parameters for the query, e.g. where:@" forename MATCH %@ ", @"Adrian"
+ * @return (DBQuery*) this value can be discarded or used to nest queries together to form clear and concise statements.
+ */
+- (DBQuery*)whereWithFormat:(NSString*)format,...;
+/**
+ * Specifies the WHERE clause of the query statement, using a standard format string.
+ 
+ *
+ * @param (NSString*)where contains the parameters for the query, e.g. where:@" forename MATCH %@ "
+ * @param (NSArray*)params is an array of parameters to be placed into the format string, useful for constructing queries through a logic path.
+ * @return (DBQuery*) this value can be discarded or used to nest queries together to form clear and concise statements.
+ */
+- (DBQuery*)whereWithFormat:(NSString*)format withParameters:(NSArray*)params;
 
 @end
 
