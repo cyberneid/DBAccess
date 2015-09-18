@@ -14,8 +14,8 @@ Copyright (C) 2010 iPresent inc. All rights reserved.
 
  */
 
-#define DB_ACCESS_DATE              20150616
-#define DB_ACCESS_VER               1.06.7
+#define DB_ACCESS_DATE              20150918
+#define DB_ACCESS_VER               1.06.9
 
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
@@ -141,11 +141,11 @@ typedef enum {
 /// This method, if implemented, will profile all queries that are performed within DBAccess.  Use the queryTime property within the DBQueryProfile* object to filter out only queries that do not meet your performance requirements.
 - (void)queryPerformedWithProfile:(DBQueryProfile*)profile;
 /// Called whenever an object is removed form the database.
-- (BOOL)onDelete:(DBObject*)entity;
+- (void)databaseEntityWasDeleted:(DBObject*)entity;
 /// Called whenever an existing object is re-written into the database.
-- (BOOL)onUpdate:(DBObject*)entity;
+- (void)databaseEntityWasUpdated:(DBObject*)entity;
 /// Called when a new object is commited for the first time into the database.
-- (BOOL)onInsert:(DBObject*)entity;
+- (void)databaseEntityWasInserted:(DBObject*)entity;
 /// An object that did not support a valid encoding mechanisum was attempted to be written to the database.  It is therefore passed to the delegate method for encoding.  You must return an NSData object that can be stored and later re-hydrated by a call to "decodeUnsupportedColumnValueForColumn"
 - (NSData*)encodeUnsupportedColumnValueForColumn:(NSString*)column inEntity:(NSString*)entity value:(id)value;
 /// Previously an object was persistsed that was not supported by DBAccess, and "encodeUnsupportedColumnValueForColumn" was called to encode it into a NSData* object, this metthod will pass back a hydrated object created from the NSData*
@@ -180,7 +180,7 @@ typedef enum {
  * @param (Class)class Array of Class* objects to be initialized
  * @return void
  */
-+(void)setupTablesFromClasses:(Class)class,...;
++(void)setupTablesFromClasses:(Class)classDecl,...;
 /**
  * Migrates data from an existing CoreData database file into DBAccess, only the supplied object names are converted.  NOTE: If successful, the original file will be removed by the routine.  Existing Objects within the supplied list will be cleared from the database.
  *
