@@ -1,24 +1,74 @@
-pod-template
+DBAccess iOS ORM
 ============
 
-An opinionated template for creating a Pod with the following features:
+[DBAccess] is a fully featured and FREE to use ORM for iOS.
 
-- Git as the source control management system.
-- Clean folder structure.
-- Project generation
-- MIT license.
-- Testing as a standard
-- Turnkey access to Travis CI
+Replace CoreData whilst keeping your existing managed objects, but dump the predicates and long-winded syntax.
+
+Instead use a simple and clean object syntax, with fast and concise inline queries.
+
+DBAccess even has a conversion method to migrate your existing CoreData tables across.
+
+Regularly updated and in constant use within many public applications it thrives on feedback from other developers and is supported by the authors via StackOverflow or directly via email.
+
+It's mantra is simple, to be fast, simple to implement and the first choice for any developer.
 
 ## Getting started
 
-There are two reasons for wanting to work on this template, making your own or improving the one for everyone's. In both cases you will want to work with the ruby classes inside the `setup` folder, and the example base template that it works on from inside `template/ios/`. 
+Integrating [DBAccess] into your project could not be simpler. This guide should be all you need to get you started and wondering how you ever developed iOS apps without it.
 
-## Best practices
+Every effort has been made to ensure that you can get working as quickly as possible, from supporting as many data types as possible and working with your existing classes to an absolute bare minimum of configuration required to integrate the framework.
 
-The command `pod lib create` aims to be ran along with this guide: http://guides.cocoapods.org/making/using-pod-lib-create.html so any changes of flow should be updated there also.
+### Requirements
 
-It is open to communal input, but adding new features, or new ideas are probably better off being discussed in an issue first. In general we try to think if an average Xcode user is going to use this feature or not, if it's unlikely is it a _very strongly_ encouraged best practice ( ala testing / CI. ) If it's something useful for saving a few minutes every deploy, or isn't easily documented in the guide it is likely to be denied in order to keep this project as simple as possible.
+| DBAccess Version | Minimum iOS Target  |                                   Notes                                   |
+|:--------------------:|:---------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
+|          1.x.x         |            iOS 7            | Xcode 5 is required. |
+
+###Install From Cocoapods
+
+####To install it, simply add the following line to your Podfile:
+```ruby
+pod "DBAccess"
+```
+
+## Usage
+
+### Setting up your project
+
+Once you have added the DBAccess framework into your application, you will need to start it as soon as possible in your application lifecycle.  DBDelegate needs to be set as well, we recomend this is added to your application delegate.
+
+```objective-c
+@interface AppDelegate : UIResponder <UIApplicationDelegate, DBDelegate>
+```
+
+Then you need to start DBAccess early on:
+
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [DBAccess setDelegate:self];
+    [DBAccess openDatabaseNamed:@"myDatabase"];
+    return YES;
+}
+```
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate, DBDelegate {
+
+	var window: UIWindow?
+
+	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		
+		DBAccess.setDelegate(self)
+		DBAccess.setPersistSynthesizedProperties(true)
+		DBAccess.openDatabaseNamed("myDatabase")
+		
+		return true
+	}
+}
+```
+
+
 
 ## Requirements:
 
