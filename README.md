@@ -103,9 +103,9 @@ class Person: DBObject {
 }
 ```
 
-###Creating Objects, Setting Values & Persistance 
+###Creating Objects, Setting Values & Persistance
+`Objective-C`
 ```objective-c
-Objective-C
 // Create a new object
 Person* thisPerson = [Person new];
 
@@ -116,6 +116,19 @@ thisPerson.name = @"Adrian Herridge";
 
 // Persist the object into the datastore
 [thisPerson commit];
+```
+`Swift`
+```swift
+// Create a new object
+var thisPerson = Person()
+
+// Set some properties
+thisPerson.age = 37;
+thisPerson.payrollNumber = 123456;
+thisPerson.name = "Adrian Herridge";
+
+// Persist the object into the datastore
+thisPerson.commit()
 ```
 
 ## Requirements:
