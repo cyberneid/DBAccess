@@ -32,7 +32,7 @@ HEADLINE FEATURES
 
 Automatic modelling and upgrading from your class structures.
 Amazingly simple FLUENT interface for dealing with the ORM
-KILLER event model, for individual objects or tables.  Makes coding apps a breeze
+Event model, for individual objects or tables.  Makes coding apps a breeze
 Inline or Async queries
 Transaction support
 Managed and unmanaged objects supported to be used however you want
@@ -41,7 +41,7 @@ Property level encryption so databases remain human readable whilst securing ind
                        DESC
   s.homepage         = "http://db-access.org"
   s.license          = 'MIT'
-  s.author           = { "${USER_NAME}" => "${USER_EMAIL}" }
+  s.author           = { "Adrian Herridge" => "devs@db-access.org" }
   s.source           = { :git => "https://github.com/editfmah/DBAccess.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '6.0'
@@ -53,5 +53,6 @@ Property level encryption so databases remain human readable whilst securing ind
   s.frameworks = 'Foundation','DBAccess'
   s.xcconfig   = { 'FRAMEWORK_SEARCH_PATHS' => '$(SRCROOT)/DBAccess/' }
   
+  s.documentation_url = 'http://docs.db-access.org/interface_d_b_access.html'  
 
 end
