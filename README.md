@@ -130,7 +130,33 @@ thisPerson.name = "Adrian Herridge";
 // Persist the object into the datastore
 thisPerson.commit()
 ```
+###Querying objects
+To retrieve objects back, we use the DBQuery object that is associated with every `DBObject` class. This then takes optional parameters such as where, limit, orderBy & offset. All of the parameters return the same query object back, enabling the building of a query within a single nested instruction.
 
+The final call to a query object is made using fetch, count, sum, fetchLightweight & fetchAsync which will then execute the query and return the results.
+
+Fetch an entire table
+`Objective-C`
+```objective-c
+DBResultSet* results = [[Person query] fetch];
+```
+`Swift`
+```swift
+var results : DBResultSet = Person.query().fetch()
+```
+Query example with parameters
+`Objective-C`
+```objective-c
+DBResultSet* results = [[[[[Person query]
+                       where:@"age = 35"]
+                       limit:99]
+                     orderBy:@"name"]
+                             fetch];
+```
+`Swift`
+```swift
+var results : DBResultSet = Person.query().whereWithFormat("age = %@", withParameters: [35]).limit(99).orderBy("name").fetch()
+```
 ## Requirements:
 
 - CocoaPods 0.31
