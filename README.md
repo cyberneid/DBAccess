@@ -179,6 +179,22 @@ for person in Person.query().fetch() {
 // or the shorthand is to use the removeAll method on the DBResultSet object
 Person.query().fetch().removeAll()
 ```
+###Other types of query
+There are other types of fetches in addition to just fetch, such as 'count', 'sum', 'groupBy' and 'ids'
+`Objective-C`
+```objective-c
+/* count the rows within the Person table */
+int count = [[Person query] count];
+ 
+/* add all of the ages together */
+double total = [[Person query] sumOf:@"age"];
+ 
+/* group all the people together by the surname property */
+NSDictionary* peopleBySurname = [[Person query] groupBy:@"name"];
+ 
+/* get just the primary keys for a query, useful to save memory */
+NSArray* ids = [[Person query] ids];
+```
 
 ## Requirements:
 
