@@ -14,8 +14,8 @@ Copyright (C) 2010 iPresent inc. All rights reserved.
 
  */
 
-#define DB_ACCESS_DATE              20150918
-#define DB_ACCESS_VER               1.06.9
+#define DB_ACCESS_DATE              20151008
+#define DB_ACCESS_VER               1.06.11
 
 #import <Foundation/Foundation.h>
 #import <objc/message.h>
