@@ -103,7 +103,7 @@ class Person: DBObject {
 }
 ```
 
-###Creating Objects, Setting Values & Persistance
+###Creating objects, setting values & persistance
 `Objective-C`
 ```objective-c
 // Create a new object
@@ -136,6 +136,7 @@ To retrieve objects back, we use the DBQuery object that is associated with ever
 The final call to a query object is made using fetch, count, sum, fetchLightweight & fetchAsync which will then execute the query and return the results.
 
 Fetch an entire table
+
 `Objective-C`
 ```objective-c
 DBResultSet* results = [[Person query] fetch];
@@ -145,6 +146,7 @@ DBResultSet* results = [[Person query] fetch];
 var results : DBResultSet = Person.query().fetch()
 ```
 Query example with parameters
+
 `Objective-C`
 ```objective-c
 DBResultSet* results = [[[[[Person query]
@@ -157,6 +159,27 @@ DBResultSet* results = [[[[[Person query]
 ```swift
 var results : DBResultSet = Person.query().whereWithFormat("age = %@", withParameters: [35]).limit(99).orderBy("name").fetch()
 ```
+
+###Removing objects
+`Objective-C`
+```objective-c
+for (Person* person in [[Person query] fetch]) {
+	[person remove];
+}
+
+// or the shorthand is to use the removeAll method on the DBResultSet object
+[[[Person query] fetch] removeAll];
+```
+`Swift`
+```swift
+for person in Person.query().fetch() {
+	person.remove()
+}
+
+// or the shorthand is to use the removeAll method on the DBResultSet object
+Person.query().fetch().removeAll()
+```
+
 ## Requirements:
 
 - CocoaPods 0.31
