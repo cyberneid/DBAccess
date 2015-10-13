@@ -196,6 +196,20 @@ NSDictionary* peopleBySurname = [[Person query] groupBy:@"name"];
 /* get just the primary keys for a query, useful to save memory */
 NSArray* ids = [[Person query] ids];
 ```
+`Swift`
+```swift
+/* count the rows within the Person table */
+var count = Person.query().count()
+
+/* add all of the ages together */
+var total = Person.query().sumOf("age")
+
+/* group all the people together by the surname property */
+var peopleBySurname = Person.query().groupBy("name")
+
+/* get just the primary keys for a query, useful to save memory */
+var ids = Person.query().ids();
+```
 
 ## Requirements:
 
