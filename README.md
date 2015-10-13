@@ -41,9 +41,12 @@ Once you have added the DBAccess framework into your application, you will need 
 ```objective-c
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBDelegate>
 ```
-
+```swift
+class AppDelegate: UIResponder, UIApplicationDelegate, DBDelegate
+```
 Then you need to start DBAccess early on:
 
+`Objective-C`
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -52,19 +55,15 @@ Then you need to start DBAccess early on:
     return YES;
 }
 ```
+`Swift`
 ```swift
-class AppDelegate: UIResponder, UIApplicationDelegate, DBDelegate {
-
-	var window: UIWindow?
-
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		
-		DBAccess.setDelegate(self)
-		DBAccess.setPersistSynthesizedProperties(true)
-		DBAccess.openDatabaseNamed("myDatabase")
-		
-		return true
-	}
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	
+	DBAccess.setDelegate(self)
+	DBAccess.setPersistSynthesizedProperties(true)
+	DBAccess.openDatabaseNamed("myDatabase")
+	
+	return true
 }
 ```
 
