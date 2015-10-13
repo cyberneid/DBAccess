@@ -39,15 +39,17 @@ pod "DBAccess"
 Once you have added the DBAccess framework into your application, you will need to start it as soon as possible in your application lifecycle.  DBDelegate needs to be set as well, we recomend this is added to your application delegate.
 
 ```objective-c
+// Objective-C
 @interface AppDelegate : UIResponder <UIApplicationDelegate, DBDelegate>
 ```
 ```swift
+// Swift
 class AppDelegate: UIResponder, UIApplicationDelegate, DBDelegate
 ```
 Then you need to start DBAccess early on:
 
-`Objective-C`
 ```objective-c
+// Objective-C
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [DBAccess setDelegate:self];
@@ -55,8 +57,8 @@ Then you need to start DBAccess early on:
     return YES;
 }
 ```
-`Swift`
 ```swift
+// Swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 	
 	DBAccess.setDelegate(self)
