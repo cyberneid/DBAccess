@@ -94,10 +94,19 @@ In Objective-C properties need to be implemented using `@dynamic`, this is to in
  
 @implementation Person
  
-@dynamic name,age, department,payrollNumber;
+@dynamic name,age,payrollNumber;
  
 @end
 
+```
+`Swift`
+```Swift
+@objc(Person)
+class Person: DBObject {
+	dynamic var name : String!
+	dynamic var age : NSNumber!
+	dynamic var payrollNumber : NSNumber!
+}
 ```
 
 ## Requirements:
