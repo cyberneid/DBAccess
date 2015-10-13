@@ -77,25 +77,19 @@ In Objective-C properties need to be implemented using `@dynamic`, this is to in
 `Objective-C`
 ```objective-c
 //  Header File : Person.h
- 
 #import <DBAccess/DBAccess.h>
 
 @interface Person : DBObject
- 
 @property NSString*         name;
 @property int               age;
 @property int               payrollNumber;
- 
 @end
 
 // Source File : Person.m
-
 #import "Person.h"
- 
+
 @implementation Person
- 
 @dynamic name,age,payrollNumber;
- 
 @end
 
 ```
@@ -107,6 +101,21 @@ class Person: DBObject {
 	dynamic var age : NSNumber!
 	dynamic var payrollNumber : NSNumber!
 }
+```
+
+###Creating Objects, Setting Values & Persistance 
+```objective-c
+Objective-C
+// Create a new object
+Person* thisPerson = [Person new];
+
+// Set some properties
+thisPerson.age = 37;
+thisPerson.payrollNumber = 123456;
+thisPerson.name = @"Adrian Herridge";
+
+// Persist the object into the datastore
+[thisPerson commit];
 ```
 
 ## Requirements:
