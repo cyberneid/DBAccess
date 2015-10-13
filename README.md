@@ -68,8 +68,37 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 	return true
 }
 ```
+###Creating Data Objects
+DBAccess objects are normal classes with properties defined on them, the ORM then inspects all these classes and mirrors their structure in a SQLite database. If you add or remove columns then the tables are updated to represent the current structure of the classes.
 
+In Objective-C properties need to be implemented using `@dynamic`, this is to indicate to the ORM that it will control the fetching and setting of these values from the database, and in Swift the property is defined as `var dynamic`
 
+####Example Object
+`Objective-C`
+```objective-c
+//  Header File : Person.h
+ 
+#import <DBAccess/DBAccess.h>
+
+@interface Person : DBObject
+ 
+@property NSString*         name;
+@property int               age;
+@property int               payrollNumber;
+ 
+@end
+
+// Source File : Person.m
+
+#import "Person.h"
+ 
+@implementation Person
+ 
+@dynamic name,age, department,payrollNumber;
+ 
+@end
+
+```
 
 ## Requirements:
 
