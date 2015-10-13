@@ -180,7 +180,8 @@ for person in Person.query().fetch() {
 Person.query().fetch().removeAll()
 ```
 ###Other types of query
-There are other types of fetches in addition to just fetch, such as 'count', 'sum', 'groupBy' and 'ids'
+There are other types of fetches in addition to just fetch, such as **count**, **sum**, **groupBy** and **ids**
+
 `Objective-C`
 ```objective-c
 /* count the rows within the Person table */
