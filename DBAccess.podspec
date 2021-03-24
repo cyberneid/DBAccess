@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DBAccess"
-  s.version          = "1.6.12"
+  s.version          = "1.6.13"
   s.summary          = "[DBAccess] is a fully featured and FREE to use ORM for iOS."
   s.description      = <<-DESC
                        [DBAccess] is a fully featured and FREE to use ORM for iOS.
@@ -44,7 +44,7 @@ Property level encryption so databases remain human readable whilst securing ind
   s.author           = { "Adrian Herridge" => "devs@db-access.org" }
   s.source           = { :git => "https://github.com/editfmah/DBAccess.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '12.0'
   s.platform     = :tvos, '9.0'
   s.requires_arc = true
 
