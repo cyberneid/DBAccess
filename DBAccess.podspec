@@ -48,6 +48,9 @@ Property level encryption so databases remain human readable whilst securing ind
   s.platform     = :tvos, '9.0'
   s.requires_arc = true
 
+  s.ios.deployment_target  = '12.0'
+  s.osx.deployment_target  = '12.10'
+
   s.preserve_paths = 'DBAccess.framework'
   s.public_header_files = 'DBAccess.framework/**/*.h'
   s.vendored_frameworks = 'DBAccess.framework'
