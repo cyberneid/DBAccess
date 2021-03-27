@@ -49,7 +49,7 @@ Property level encryption so databases remain human readable whilst securing ind
   s.requires_arc = true
 
   s.ios.deployment_target  = '12.0'
-  s.osx.deployment_target  = '12.10'
+  s.osx.deployment_target  = '9.0'
 
   s.preserve_paths = 'DBAccess.framework'
   s.public_header_files = 'DBAccess.framework/**/*.h'
