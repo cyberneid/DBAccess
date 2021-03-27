@@ -42,14 +42,14 @@ Property level encryption so databases remain human readable whilst securing ind
   s.homepage         = "http://db-access.org"
   s.license          = 'MIT'
   s.author           = { "Adrian Herridge" => "devs@db-access.org" }
-  s.source           = { :git => "https://github.com/editfmah/DBAccess.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/cyberneid/DBAccess.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '12.0'
   s.platform     = :tvos, '9.0'
   s.requires_arc = true
 
   s.ios.deployment_target  = '12.0'
-  s.osx.deployment_target  = '9.0'
+  s.osx.deployment_target  = '13.0'
 
   s.preserve_paths = 'DBAccess.framework'
   s.public_header_files = 'DBAccess.framework/**/*.h'
